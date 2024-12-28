@@ -48,6 +48,39 @@
         gtag("js", new Date());
 
         gtag("config", "G-6X6GS9623F");
+        //Years of Exp Dynamic
+        document.addEventListener("DOMContentLoaded", () => {
+            // Work experience periods
+            const workPeriods = [
+                { start: new Date("2018-07-01"), end: new Date("2019-07-01") }, // Emerson
+                { start: new Date("2021-04-01"), end: new Date("2022-08-01") }, // Persistent Systems
+                { start: new Date("2022-08-01"), end: new Date() }, // Infosys Limited (current job)
+            ];
+
+            // Function to calculate total work experience
+            const calculateTotalExperience = (periods) => {
+                let totalMonths = 0;
+
+                periods.forEach(period => {
+                    const start = period.start;
+                    const end = period.end;
+                    const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+                    totalMonths += months;
+                });
+
+                // Convert months to years (rounded up)
+                return Math.round(totalMonths / 12);
+            };
+
+            // Calculate the total experience
+            const totalExperience = calculateTotalExperience(workPeriods);
+
+            // Dynamically update all elements with the class 'experience-years'
+            const experienceElements = document.querySelectorAll(".experience-years");
+            experienceElements.forEach(element => {
+                element.textContent = totalExperience;
+            });
+        });
     </script>
 </head>
 
@@ -75,7 +108,8 @@
                     </div>
                     <div class="m-2 p-4 rounded-md bg-gray-50 text-sm text-gray-600 dark:text-night-200 mt-2">
                         <p>
-                            Salesforce Developer with 4.5+ years of experience in APEX,
+                            Salesforce Developer with <span class="experience-years"></span> years of experience in
+                            APEX,
                             LWC/AURA, and REST APIs.
                         </p>
                         <p class="my-2">Passionate about AI, Process Improvement.</p>
@@ -109,14 +143,14 @@
                                 <span>Location</span>
                                 <span>Pune, India</span>
                             </li>
-                            <li class="flex justify-between border-b py-2.5">
-                                <span>Experience</span>
-                                <span>> 4.5 Years</span>
-                            </li>
                             <li class="flex justify-between pt-2.5">
+                                <span>Experience</span>
+                                <span> <span class="experience-years"></span> Years</span>
+                            </li>
+                            <!-- <li class="flex justify-between pt-2.5">
                                 <span>Availability</span>
                                 <span>In 3 Months</span>
-                            </li>
+                            </li> -->
                             <!-- <li class="flex justify-between pt-2.5">
                                 <span>Relocation</span>
                                 <span>No</span>
@@ -299,6 +333,15 @@
                         Publications
                     </h2>
                     <div class="p-2">
+                        <div class="flex items-center mb-2">
+                            <img src="Assets/images/OSNetworkLogger.png" class="w-8 h-8 mr-4" />
+                            <div>
+                                <a class="text-blue-800 hover:text-blue-900 font-semibold"
+                                    href="https://chromewebstore.google.com/detail/salesforce-omnistudio-hel/gaogdijndgigjopjiidpemfglhokcmpe"
+                                    target="_blank">Salesforce OmniStudio Debugger</a>
+                                <p class="text-xs text-gray-500">Chrome Extension</p>
+                            </div>
+                        </div>
                         <!-- Publication 1 -->
                         <div class="flex items-center">
                             <img src="Assets/images/sf_os_helper.png" class="w-8 h-8" />
